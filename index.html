@@ -2,74 +2,51 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yousif al jarah | Global Intelligence</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yousif al jarah | مركز الاستخبارات</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="world-clocks">
         <div class="clock-item"><span class="city-name">BAGHDAD</span><div id="clock-baghdad" class="digital-time">00:00:00</div></div>
         <div class="clock-item"><span class="city-name">TEHRAN</span><div id="clock-tehran" class="digital-time">00:00:00</div></div>
-        <div class="clock-item"><span class="city-name">JERUSALEM</span><div id="clock-jerusalem" class="digital-time">00:00:00</div></div>
         <div class="clock-item"><span class="city-name">WASHINGTON</span><div id="clock-washington" class="digital-time">00:00:00</div></div>
     </div>
 
     <header>
-        <div class="logo-box">
-            <svg id="glowing-logo" width="70" height="70" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="45" stroke="#9333ea" stroke-width="2"/>
-                <path d="M30 40 L70 40 M50 20 L50 80 M25 70 Q50 60 75 70" stroke="#9333ea" stroke-width="4" stroke-linecap="round"/>
-                <circle cx="50" cy="50" r="5" fill="#9333ea"/>
-            </svg>
-            <div class="site-title">YOUSIF <span>AL JARAH</span></div>
-            <small class="subtitle">GLOBAL STRATEGIC INTELLIGENCE</small>
-        </div>
+        <div class="site-title">YOUSIF <span>AL JARAH</span></div>
+        <p class="subtitle">GLOBAL STRATEGIC INTELLIGENCE</p>
     </header>
 
     <div class="main-container">
         <aside class="sidebar">
             <div class="panel">
                 <h4 class="panel-title">رادار الأحداث</h4>
-                <div id="radar-list">
-                    <div class="event-item">🔴 رصد نشاط راداري في المنطقة..</div>
-                    <div class="event-item">🔴 تحديث ميداني عاجل..</div>
-                </div>
+                <div class="event-item">🔴 تحركات ميدانية مكتشفة..</div>
+                <div class="event-item">🔴 تحديث البيانات الاستراتيجية..</div>
             </div>
             <div class="panel">
                 <h4 class="panel-title">المحلل القانوني</h4>
-                <div class="legal-box"><p id="legal-output">بانتظار التحليل الاستراتيجي...</p></div>
+                <div id="legal-output" class="legal-box">بانتظار التحليل الفوري...</div>
                 <button class="analyze-btn" onclick="analyzeIncident()">تفعيل التحليل</button>
             </div>
         </aside>
 
         <main class="content-area">
             <div class="video-grid">
-                <div class="video-box">
-                    <div class="video-label">الجزيرة مباشر</div>
-                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-box">
-                    <div class="video-label">الحدث مباشر</div>
-                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BGAHt60ilS67_jD_0_g" frameborder="0" allowfullscreen></iframe>
-                </div>
+                <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" frameborder="0" allowfullscreen></iframe></div>
+                <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BGAHt60ilS67_jD_0_g" frameborder="0" allowfullscreen></iframe></div>
             </div>
-            <div class="panel">
-                <div id="map"></div>
-            </div>
+            <div id="map" style="height: 400px; border-radius: 8px;"></div>
         </main>
     </div>
 
     <footer class="legal-footer">
-        <h4>Legal Disclaimer | إخلاء مسؤولية</h4>
-        <p>مشروع أكاديمي لباحث القانون والسياسة <b>يوسف الجراح</b></p>
-        <div class="visitor-stats">
-            <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter">
-        </div>
+        <p>مشروع أكاديمي | الباحث  يوسف الجراح</p>
+        <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter">
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
