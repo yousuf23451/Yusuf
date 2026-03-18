@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yousif al jarah | Global Strategic Intelligence</title>
+    <title>Yousif al jarah | Global Intelligence</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <link rel="stylesheet" href="Yusuf/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -34,19 +34,16 @@
     <div class="main-container">
         <aside class="sidebar">
             <div class="panel">
-                <h4 class="panel-title">رادار الأحداث العاجلة</h4>
+                <h4 class="panel-title">رادار الأحداث</h4>
                 <div id="radar-list">
-                    <div class="event-item">🔴 رصد نشاط راداري فوق منطقة الخليج..</div>
-                    <div class="event-item">🔴 تحديث: تحركات دبلوماسية في مجلس الأمن..</div>
+                    <div class="event-item">🔴 رصد نشاط راداري في المنطقة..</div>
+                    <div class="event-item">🔴 تحديث ميداني عاجل..</div>
                 </div>
             </div>
-
             <div class="panel">
-                <h4 class="panel-title">المحلل القانوني الدولي</h4>
-                <div class="legal-box">
-                    <p id="legal-output">بانتظار مطابقة الأحداث مع نصوص القانون الدولي...</p>
-                </div>
-                <button class="analyze-btn" onclick="analyzeIncident()">تفعيل التحليل القانوني</button>
+                <h4 class="panel-title">المحلل القانوني</h4>
+                <div class="legal-box"><p id="legal-output">بانتظار التحليل الاستراتيجي...</p></div>
+                <button class="analyze-btn" onclick="analyzeIncident()">تفعيل التحليل</button>
             </div>
         </aside>
 
@@ -62,29 +59,20 @@
                 </div>
             </div>
             <div class="panel">
-                <h4 class="panel-title">خريطة مراقبة النزاعات (Live Feed)</h4>
                 <div id="map"></div>
             </div>
         </main>
     </div>
 
     <footer class="legal-footer">
-        <div class="footer-inner">
-            <h4>إخلاء مسؤولية قانوني | Legal Disclaimer</h4>
-            <p>هذه المنصة مشروع أكاديمي وبحثي مستقل للطالب يوسف الجراح - كلية القانون.</p>
-            <div class="visitor-stats">
-                <span class="stats-label">إجمالي التaccess الميداني:</span>
-                <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter" class="counter-img">
-            </div>
-            <p class="copyright">© 2025-2026 YOUSIF AL JARAH. ALL RIGHTS RESERVED.</p>
+        <h4>Legal Disclaimer | إخلاء مسؤولية</h4>
+        <p>مشروع أكاديمي لباحث القانون والسياسة <b>يوسف الجراح</b></p>
+        <div class="visitor-stats">
+            <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter">
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.
-
-
-js"></script>
-    
-    <script src="Yusuf/script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
