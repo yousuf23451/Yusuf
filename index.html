@@ -2,10 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yousif al jarah | الاستخبارات الجيوسياسية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yousif al jarah | الرادار الجيوسياسي</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,13 +30,15 @@
         <aside class="sidebar">
             <div class="panel">
                 <h4 class="panel-title">الخلاصات العاجلة (LIVE)</h4>
-                <div id="news-ticker"></div>
+                <div id="news-ticker">
+                    <div class="event-item">🔴 جاري الاتصال بالرادار...</div>
+                </div>
             </div>
 
             <div class="panel">
                 <h4 class="panel-title">وحدة التحليل الاستراتيجي</h4>
                 <div class="legal-box">
-                    <p id="political-output">بانتظار التقاط إشارات عاجلة...</p>
+                    <p id="political-output">بانتظار التقاط إشارات ميدانية عاجلة...</p>
                 </div>
                 <div class="btn-group">
                     <button class="analyze-btn" onclick="analyzeIncident()">تحليل المشهد</button>
@@ -46,16 +52,17 @@
                 <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" frameborder="0" allowfullscreen></iframe></div>
                 <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BGAHt60ilS67_jD_0_g" frameborder="0" allowfullscreen></iframe></div>
             </div>
-            <div id="map"></div>
+            <div class="panel">
+                <div id="map"></div>
+            </div>
         </main>
     </div>
 
     <footer class="legal-footer">
-        <p>مشروع أكاديمي | باحث العلوم السياسية <b>يوسف الجراح</b></p>
+        <p>مشروع أكاديمي | باحث العلوم السياسية <b>يوسف الجراح</b> [جامعة العراقية]</p>
         <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter">
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
