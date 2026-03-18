@@ -1,4 +1,4 @@
-// 1. Matrix Effect
+// --- 1. تأثير الماتريكس البنفسجي (الخلفية) ---
 const canvas = document.getElementById('matrix-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -21,7 +21,7 @@ function drawMatrix() {
 }
 setInterval(drawMatrix, 35);
 
-// 2. Scramble Animation Function
+// --- 2. دالة فك التشفير التفاعلية (Scramble Effect) ---
 function scrambleText(element, finalText) {
     let iteration = 0;
     const interval = setInterval(() => {
@@ -30,17 +30,17 @@ function scrambleText(element, finalText) {
             return alphabet[Math.floor(Math.random() * 36)];
         }).join("");
         if(iteration >= finalText.length) clearInterval(interval);
-        iteration += 1/3;
+        iteration += 1/2;
     }, 30);
 }
 
-// 3. News Ticker
+// --- 3. محاكي العواجل المباشرة ---
 const breakingNews = [
-    "عاجل: رصد تحركات عسكرية في شرق المتوسط.",
-    "عاجل: بوادر أزمة دبلوماسية حول ملف الطاقة الدولي.",
-    "عاجل: هجوم سيبراني يستهدف خوادم استراتيجية.",
-    "عاجل: تقارير عن تصعيد وشيك في نقاط التماس.",
-    "عاجل: إعادة تموضع استراتيجي للقوى الفاعلة ميدانياً."
+    "عاجل: رصد تحركات عسكرية غير مسبوقة في النقاط الساخنة الإقليمية.",
+    "عاجل: بوادر أزمة دبلوماسية حادة بين القوى الفاعلة حول ملف أمن الطاقة.",
+    "عاجل: هجوم سيبراني منسق يستهدف البنى التحتية للمعلومات الاستراتيجية.",
+    "عاجل: تقارير عن تغيير مفاجئ في توازنات القوى الميدانية شرقاً.",
+    "عاجل: صدور تقدير موقف يشير إلى احتمالية تصعيد وشيك."
 ];
 
 function updateNews() {
@@ -49,59 +49,70 @@ function updateNews() {
     const el = document.createElement('div');
     el.className = 'event-item';
     ticker.prepend(el);
-    scrambleText(el, news);
+    scrambleText(el, news); // تطبيق تأثير التشفير
     if (ticker.children.length > 5) ticker.lastChild.remove();
 }
-setInterval(updateNews, 6000);
+// تحديث أولي ثم كل 6 ثوانٍ
+setTimeout(updateNews, 1000);
+setInterval(updateNews, 7000);
 
-// 4. Analysis Logic
+// --- 4. المحلل السياسي المرتبط بالعواجل ---
 function analyzeIncident() {
     const out = document.getElementById('political-output');
-    const lastNews = document.querySelector('.event-item')?.innerText || "لا توجد بيانات";
-    showAlert("جاري معالجة الإشارات الميدانية...");
-    out.innerText = "تحليل المشهد لـ: " + lastNews;
+    const lastNews = document.querySelector('.event-item')?.innerText || "لا توجد عواجل";
+    showAlert("بروتوكول التحليل الجيوسياسي: نشط");
+    out.innerText = "تحليل الأثر الاستراتيجي لـ: " + lastNews;
     setTimeout(() => {
-        const results = [
-            "التحليل: تصعيد يهدف لفرض واقع جديد على طاولة المفاوضات.",
-            "التحليل: تحول استراتيجي لكسر حالة الجمود السياسي في المنطقة.",
-            "التحليل: استخدام سياسة حافة الهاوية لتحقيق مكاسب جيوسياسية.",
-            "التحليل: رغبة في إعادة رسم مناطق النفوذ دون مواجهة شاملة."
+        const insights = [
+            "التحليل: تصعيد يهدف لفرض واقع جديد على طاولة المفاوضات الدولية.",
+            "التحليل: تحول استراتيجي لكسر جمود المشهد السياسي في المنطقة.",
+            "التحليل: مؤشرات قوية على اعتماد استراتيجية حافة الهاوية (Whistleblowing).",
+            "التحليل: البيانات تظهر رغبة في إعادة رسم مناطق النفوذ دون مواجهة شاملة."
         ];
-        scrambleText(out, results[Math.floor(Math.random() * results.length)]);
-        showAlert("اكتمل التقرير الاستراتيجي.");
+        scrambleText(out, insights[Math.floor(Math.random() * insights.length)]);
+        showAlert("اكتمل التقدير السياسي للموقف.");
     }, 2000);
 }
 
-// 5. Export Report
+// --- 5. استخراج التقرير الرسمي ---
 function exportReport() {
     const output = document.getElementById('political-output').innerText;
     if (output.includes("بانتظار")) return showAlert("خطأ: لا يوجد تحليل حالي.");
-    const report = تقرير استراتيجي - يوسف الجراح\n${new Date().toLocaleString('ar-IQ')}\n------------------\nالتحليل: ${output};
+    const time = new Date().toLocaleString('ar-IQ');
+    const report = تقدير موقف استراتيجي - يوسف الجراح\nتاريخ التوليد: ${time}\n------------------\nالتحليل: ${output}\nالتوصية: مراقبة التحركات الميدانية.;
     navigator.clipboard.writeText(report).then(() => {
         showAlert("تم نسخ التقرير الرسمي للحافظة!");
         alert(report);
     });
 }
 
-// 6. Helpers (Clocks & Map)
+// --- 6. الخريطة التفاعلية Leaflet (ثيم ليلي) ---
+var map = L.map('map', { zoomControl: false }).setView([33.3152, 44.3661], 4);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: 'Global Strategic Intel - Yousif'
+}).addTo(map);
+
+
+...L.circle([33.3152, 44.3661], {
+    color: '#9333ea',
+    fillColor: '#9333ea',
+    fillOpacity: 0.5,
+    radius: 80000
+}).addTo(map).bindPopup("<b>مركز عمليات الجراح</b><br>تحديث: نشط");
+
+// --- 7. المساعدات (الساعات والتنبيهات) ---
+setInterval(() => {
+    const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+    document.getElementById('clock-baghdad').innerText = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Asia/Baghdad' });
+    document.getElementById('clock-tehran').innerText = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Asia/Tehran' });
+    document.getElementById('clock-washington').innerText = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'America/New_York' });
+}, 1000);
+
 function showAlert(msg) {
     let container = document.querySelector('.alert-container') || document.createElement('div');
     container.className = 'alert-container'; document.body.appendChild(container);
     const alert = document.createElement('div'); alert.className = 'intel-alert';
     alert.innerText = msg; container.appendChild(alert);
-    setTimeout(() => alert.remove(), 4000);
+    setTimeout(() => { alert.style.opacity = '0'; setTimeout(() => alert.remove(), 500); }, 3500);
 }
-
-setInterval(() => {
-    const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-    document.getElementById('clock-baghdad').innerText = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Asia/Baghdad' });
-    document.getElementById('clock-tehran').
-
-
-innerText = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'Asia/Tehran' });
-    document.getElementById('clock-washington').innerText = new Date().toLocaleTimeString('en-US', { ...opts, timeZone: 'America/New_York' });
-}, 1000);
-
-let map = L.map('map', { zoomControl: false }).setView([33.3152, 44.3661], 4);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
-L.circle([33.3152, 44.3661], { color: '#9333ea', radius: 100000, fillColor: '#9333ea', fillOpacity: 0.4 }).addTo(map);
