@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youssif Al Jarah | مركز العمليات الإخبارية</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#050505] text-white font-['Almarai'] overflow-hidden">
+
+    <audio id="radar-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3" preload="auto"></audio>
+
+    <header class="border-b border-[#3d441e] bg-black/90 p-4 flex justify-between items-center z-50 relative">
+        <div class="logo-container">
+            <h1 class="text-3xl font-black italic tracking-tighter uppercase leading-none">
+                <span class="text-white">YOUSSIF</span> <span class="text-purple-600">AL JARAH</span>
+            </h1>
+            <div class="flex items-center gap-2 mt-1">
+                <span class="h-[1px] w-8 bg-olive"></span>
+                <span class="text-[9px] text-olive tracking-[0.3em]">GLOBAL STRATEGIC INTELLIGENCE</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div class="system-status flex items-center gap-2 px-3 py-1 bg-[#101108] border border-olive/30 rounded-full">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-[10px] font-bold text-olive">AI ENGINE ACTIVE</span>
+            </div>
+            <button onclick="toggleLayout()" class="bg-purple-700 hover:bg-purple-600 px-4 py-2 text-xs font-bold rounded shadow-[0_0_15px_rgba(147,51,234,0.4)] transition-all">تبديل العرض</button>
+        </div>
+    </header>
+
+    <div class="bg-[#1a1c0e] border-b border-purple-900/30 py-2 flex items-center relative overflow-hidden">
+        <div class="bg-purple-800 text-white px-6 py-1 font-black italic z-10 shadow-xl">URGENT</div>
+        <marquee id="main-marquee" class="font-bold text-gray-200 text-sm">
+            نظام يوسف الجراح يراقب الآن: تحركات عسكرية مكثفة على الحدود الإيرانية.. الخوارزمية تحلل ترددات الرادار الآن..
+        </marquee>
+    </div>
+
+    <div class="flex h-[calc(100vh-130px)]">
+        
+        <main class="flex-1 p-4 overflow-y-auto">
+            <div id="video-grid" class="grid grid-cols-2 gap-3 transition-all duration-500">
+                </div>
+        </main>
+
+        <aside class="w-[350px] bg-[#080904] border-r border-[#3d441e] p-4 flex flex-col gap-4">
+            <div class="panel shadow-inner">
+                <h3 class="text-purple-500 text-xs font-black mb-3 flex items-center justify-between">
+                    رادار الاحداث
+                    <span class="text-[9px] text-gray-500">LIVE FEED</span>
+                </h3>
+                <div id="news-feed" class="space-y-4 overflow-y-auto max-h-[400px] custom-scroll">
+                    </div>
+            </div>
+
+            <div class="panel mt-auto bg-black/40 border-t border-purple-900/20 p-3">
+                <h4 class="text-olive text-[10px] font-bold mb-2 uppercase">تحليل التهديدات AI</h4>
+                <div class="w-full bg-gray-900 h-1 mb-2"><div id="threat-level" class="bg-red-600 h-full w-[85%] animate-pulse"></div></div>
+                <p class="text-[9px] text-gray-500">مستوى التوتر الإقليمي: <span class="text-red-500 font-bold">مرتفع جداً</span></p>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
