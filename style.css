@@ -1,68 +1,35 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yousif al jarah | الرادار الجيوسياسي</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <canvas id="matrix-canvas"></canvas>
+:root { --purple: #9333ea; --bg: #0a0a0c; }
+body { margin: 0; background: var(--bg); color: #fff; font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
 
-    <div class="world-clocks">
-        <div class="clock-item"><span class="city-name">BAGHDAD</span><div id="clock-baghdad" class="digital-time">00:00:00</div></div>
-        <div class="clock-item"><span class="city-name">TEHRAN</span><div id="clock-tehran" class="digital-time">00:00:00</div></div>
-        <div class="clock-item"><span class="city-name">WASHINGTON</span><div id="clock-washington" class="digital-time">00:00:00</div></div>
-    </div>
+/* تنسيق الماتريكس */
+#matrix-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.12; }
 
-    <header>
-        <div class="site-title">YOUSIF <span>AL JARAH</span></div>
-        <p class="subtitle">GLOBAL STRATEGIC INTELLIGENCE</p>
-    </header>
+.world-clocks { display: flex; justify-content: space-around; background: rgba(0,0,0,0.85); padding: 10px; border-bottom: 2px solid var(--purple); direction: ltr; }
+.digital-time { font-family: 'Orbitron'; color: #fff; text-shadow: 0 0 10px var(--purple); font-weight: bold; }
+.city-name { font-family: 'Orbitron'; font-size: 0.6rem; color: var(--purple); display: block; }
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <div class="panel">
-                <h4 class="panel-title">الخلاصات العاجلة (LIVE)</h4>
-                <div id="news-ticker">
-                    <div class="event-item">🔴 جاري الاتصال بالرادار...</div>
-                </div>
-            </div>
+header { padding: 30px; text-align: center; }
+.site-title { font-size: 2rem; font-weight: bold; margin: 0; }
+.site-title span { color: var(--purple); text-shadow: 0 0 20px var(--purple); }
+.subtitle { color: #6b7280; font-size: 0.7rem; letter-spacing: 4px; display: block; margin-top: 5px; }
 
-            <div class="panel">
-                <h4 class="panel-title">وحدة التحليل الاستراتيجي</h4>
-                <div class="legal-box">
-                    <p id="political-output">بانتظار التقاط إشارات ميدانية عاجلة...</p>
-                </div>
-                <div class="btn-group">
-                    <button class="analyze-btn" onclick="analyzeIncident()">تحليل المشهد</button>
-                    <button id="export-btn" class="analyze-btn" onclick="exportReport()">استخراج تقرير</button>
-                </div>
-            </div>
-        </aside>
+.main-container { display: grid; grid-template-columns: 320px 1fr; gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto; }
+.panel { background: rgba(20, 20, 25, 0.95); border: 1px solid rgba(147,51,234,0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+.panel-title { color: var(--purple); border-right: 3px solid var(--purple); padding-right: 10px; margin-bottom: 15px; font-weight: bold; }
 
-        <main class="content-area">
-            <div class="video-grid">
-                <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" frameborder="0" allowfullscreen></iframe></div>
-                <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BGAHt60ilS67_jD_0_g" frameborder="0" allowfullscreen></iframe></div>
-            </div>
-            <div class="panel">
-                <div id="map"></div>
-            </div>
-        </main>
-    </div>
+/* العواجل */
+.event-item { border-right: 2px solid var(--purple); padding: 8px; margin-bottom: 8px; background: rgba(147, 51, 234, 0.05); font-size: 0.8rem; line-height: 1.4; }
+@keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-    <footer class="legal-footer">
-        <p>مشروع أكاديمي | باحث العلوم السياسية <b>يوسف الجراح</b> [جامعة العراقية]</p>
-        <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter">
-    </footer>
+/* وحدة التحليل */
+.legal-box { background: #000; padding: 15px; border-left: 3px solid var(--purple); min-height: 80px; font-size: 0.85rem; line-height: 1.5; color: #d1d5db; }
+.btn-group { display: flex; gap: 10px; margin-top: 15px; }
+.analyze-btn { flex: 1; background: var(--purple); color: #fff; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s ease; }
+#export-btn { background: #10b981; }
 
-    <script src="script.js"></script>
-</body>
-</html>
+/* الفيديوهات والخريطة */
+.video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.video-box { aspect-ratio: 16/9; background: #000; border: 1px solid #333; overflow: hidden; border-radius: 5px; }
+#map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #333; z-index: 10; }
+
+.legal-footer { text-align: center; padding: 50px; background: #050505; border-top: 2px solid var(--purple); margin-top: 40px;
