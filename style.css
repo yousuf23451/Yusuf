@@ -1,77 +1,43 @@
 :root {
-    --primary-purple: #9333ea;
-    --dark-bg: #0a0a0c;
-    --panel-bg: rgba(20, 20, 25, 0.95);
+    --primary: #9333ea;
+    --bg: #0a0a0c;
+    --panel: rgba(20, 20, 25, 0.9);
 }
 
-body {
-    margin: 0;
-    background: var(--dark-bg);
-    color: #fff;
-    font-family: 'Tajawal', sans-serif;
-    overflow-x: hidden;
-}
+body { margin: 0; background: var(--bg); color: #fff; font-family: 'Tajawal', sans-serif; }
 
-/* الساعات */
-.world-clocks {
-    display: flex;
-    justify-content: space-around;
-    background: #000;
-    padding: 10px;
-    border-bottom: 2px solid var(--primary-purple);
-    direction: ltr;
-}
-.digital-time { font-family: 'Orbitron'; color: #fff; text-shadow: 0 0 10px var(--primary-purple); }
-.city-name { font-family: 'Orbitron'; font-size: 0.6rem; color: var(--primary-purple); }
+.world-clocks { display: flex; justify-content: space-around; background: #000; padding: 10px; border-bottom: 2px solid var(--primary); direction: ltr; }
+.digital-time { font-family: 'Orbitron'; font-size: 1.1rem; text-shadow: 0 0 10px var(--primary); }
+.city-name { font-family: 'Orbitron'; font-size: 0.6rem; color: var(--primary); }
 
-/* الهيدر */
-header { padding: 30px; text-align: center; border-bottom: 1px solid rgba(147, 51, 234, 0.2); }
-.site-title { font-size: 2rem; letter-spacing: 2px; }
-.site-title span { color: var(--primary-purple); }
+header { padding: 25px; text-align: center; border-bottom: 1px solid rgba(147, 51, 234, 0.2); }
+.site-title { font-size: 1.8rem; letter-spacing: 2px; }
+.site-title span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
 .subtitle { color: #6b7280; letter-spacing: 3px; font-size: 0.7rem; }
 
-/* الحاوية الرئيسية */
-.main-container {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 20px;
-    padding: 20px;
-}
+.main-container { display: grid; grid-template-columns: 320px 1fr; gap: 20px; padding: 20px; }
 
-/* الألواح الجانبية */
-.panel {
-    background: var(--panel-bg);
-    border: 1px solid rgba(147, 51, 234, 0.2);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-.panel-title { color: var(--primary-purple); border-right: 3px solid var(--primary-purple); padding-right: 10px; margin-top: 0; }
+.panel { background: var(--panel); border: 1px solid rgba(147, 51, 234, 0.2); padding: 15px; border-radius: 8px; }
+.panel-title { color: var(--primary); border-right: 3px solid var(--primary); padding-right: 10px; margin: 0 0 15px 0; }
 
-.event-item { font-size: 0.8rem; background: rgba(255,255,255,0.03); padding: 8px; margin-bottom: 5px; animation: blink 2s infinite; }
-@keyframes blink { 50% { opacity: 0.5; } }
+.event-item { font-size: 0.8rem; background: rgba(255,255,255,0.03); padding: 8px; margin-bottom: 5px; border-radius: 4px; }
+.legal-box { background: #000; padding: 10px; border-left: 2px solid var(--primary); min-height: 50px; font-size: 0.85rem; }
+.analyze-btn { width: 100%; background: var(--primary); color: #fff; border: none; padding: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; margin-top: 10px; }
 
-.legal-box { background: rgba(0,0,0,0.4); padding: 10px; border-left: 2px solid var(--primary-purple); min-height: 50px; margin-bottom: 10px; }
-.analyze-btn { width: 100%; background: var(--primary-purple); color: #fff; border: none; padding: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; }
-
-/* الفيديوهات والخريطة */
 .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
 .video-box { aspect-ratio: 16/9; background: #000; position: relative; border: 1px solid #333; }
 .video-box iframe { width: 100%; height: 100%; }
-.video-label { position: absolute; top: 5px; right: 5px; background: rgba(147, 51, 234, 0.8); padding: 2px 8px; font-size: 0.7rem; z-index: 10; }
+.video-label { position: absolute; top: 5px; right: 5px; background: var(--primary); padding: 2px 8px; font-size: 0.7rem; z-index: 5; }
 
-#map { height: 400px; border-radius: 8px; border: 1px solid #444; }
+#map { height: 400px; width: 100%; border-radius: 8px; }
 
-/* الشعار */
 #glowing-logo { transition: 0.3s; }
-.glowing-active { filter: drop-shadow(0 0 15px var(--primary-purple)); transform: scale(1.1); }
+.glowing-active { filter: drop-shadow(0 0 15px var(--primary)); transform: scale(1.1); }
 
-/* الفوتر */
-.legal-footer { background: #050505; padding: 40px; text-align: center; border-top: 2px solid var(--primary-purple); }
-.visitor-stats { margin: 20px 0; border: 1px dashed rgba(147, 51, 234, 0.3); padding: 10px; display: inline-block; }
-.counter-img { filter: hue-rotate(280deg); vertical-align: middle; }
+.legal-footer { background: #050505; padding: 40px; text-align: center; border-top: 2px solid var(--primary); margin-top: 40px; }
+.visitor-stats { margin-top: 15px; border: 1px dashed var(--primary); padding: 10px; display: inline-block; }
+.visitor-stats img { filter: hue-rotate(280deg); }
 
-/* الموبايل */
 @media (max-width: 768px) {
     .main-container { grid-template-columns: 1fr; }
     .video-grid { grid-template-columns: 1fr; }
