@@ -1,69 +1,89 @@
-<h4>إخلاء مسؤولية قانوني | Legal Disclaimer</h4>
-            <p style="font-size: 0.8rem; line-height: 1.6;">
-                هذه المنصة هي مشروع أكاديمي وبحثي مستقل خاص بالطالب <b>يوسف الجراح</b> (جامعة العراقية - كلية القانون). 
-                تُستخدم لأغراض التحليل السياسي والقانوني فقط. جميع حقوق البث والبيانات تعود لمصادرها الأصلية.
-            </p>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yousif al jarah | Global Strategic Intelligence</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="world-clocks">
+        <div class="clock-item"><span class="city-name">BAGHDAD</span><div id="clock-baghdad" class="digital-time">00:00:00</div></div>
+        <div class="clock-item"><span class="city-name">TEHRAN</span><div id="clock-tehran" class="digital-time">00:00:00</div></div>
+        <div class="clock-item"><span class="city-name">JERUSALEM</span><div id="clock-jerusalem" class="digital-time">00:00:00</div></div>
+        <div class="clock-item"><span class="city-name">WASHINGTON</span><div id="clock-washington" class="digital-time">00:00:00</div></div>
+    </div>
+
+    <header>
+        <div class="logo-box">
+            <svg id="glowing-logo" width="70" height="70" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" stroke="#9333ea" stroke-width="2"/>
+                <path d="M30 40 L70 40 M50 20 L50 80 M25 70 Q50 60 75 70" stroke="#9333ea" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="5" fill="#9333ea"/>
+            </svg>
+            <div class="site-title">YOUSIF <span>AL JARAH</span></div>
+            <small class="subtitle">GLOBAL STRATEGIC INTELLIGENCE</small>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="panel">
+                <h4 class="panel-title">رادار الأحداث العاجلة</h4>
+                <div id="radar-list">
+                    <div class="event-item">🔴 رصد نشاط راداري فوق منطقة الخليج..</div>
+                    <div class="event-item">🔴 تحديث: تحركات دبلوماسية في مجلس الأمن..</div>
+                    <div class="event-item">🔴 عاجل: صدور تقرير أممي جديد بشأن الحدود..</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h4 class="panel-title">المحلل القانوني الدولي</h4>
+                <div class="legal-box">
+                    <p id="legal-output">بانتظار مطابقة الأحداث مع نصوص القانون الدولي...</p>
+                </div>
+                <button class="analyze-btn" onclick="analyzeIncident()">تفعيل التحليل القانوني</button>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="video-grid">
+                <div class="video-box">
+                    <div class="video-label">الجزيرة مباشر</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <div class="video-label">الحدث مباشر</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BGAHt60ilS67_jD_0_g" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h4 class="panel-title">خريطة مراقبة النزاعات (Live Feed)</h4>
+                <div id="map"></div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="legal-footer">
+        <div class="footer-inner">
+            <h4>إخلاء مسؤولية قانوني | Legal Disclaimer</h4>
+            <p>هذه المنصة مشروع أكاديمي وبحثي مستقل للطالب يوسف الجراح - كلية القانون.</p>
             <div class="visitor-stats">
                 <span class="stats-label">إجمالي التaccess الميداني:</span>
-                <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Visitor Count" class="counter-img">
+                <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter" class="counter-img">
             </div>
-            <p style="margin-top: 20px; font-size: 0.7rem; color: #4b5563;">© 2025-2026 YOUSIF AL JARAH. ALL RIGHTS RESERVED.</p>
+            <p class="copyright">© 2025-2026 YOUSIF AL JARAH. ALL RIGHTS RESERVED.</p>
         </div>
-    </footer>
 
-    <script>
-        // 1. تحديث الساعات العالمية
-        function updateClocks() {
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            document.getElementById('clock-baghdad').innerText = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'Asia/Baghdad' });
-            document.getElementById('clock-tehran').innerText = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'Asia/Tehran' });
-            document.getElementById('clock-jerusalem').innerText = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'Asia/Jerusalem' });
-            document.getElementById('clock-washington').innerText = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/New_York' });
-        }
-        setInterval(updateClocks, 1000);
-        updateClocks();
 
-        // 2. إعداد الخريطة التفاعلية
-        var map = L.map('map').setView([33.3152, 44.3661], 4);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+</footer>
 
-        // إضافة نقاط توتر ثابتة
-        const spots = [
-            { name: "بغداد", coords: [33.3152, 44.3661], info: "مراكز القرار السياسي" },
-            { name: "طهران", coords: [35.6892, 51.3890], info: "تأهب استراتيجي" },
-            { name: "واشنطن", coords: [38.9072, -77.0369], info: "تحليل السياسات الخارجية" }
-        ];
-        spots.forEach(s => {
-            L.circle(s.coords, { color: '#9333ea', radius: 50000 }).addTo(map).bindPopup(s.name + ": " + s.info);
-        });
-
-        // 3. المحلل القانوني
-        function analyzeIncident() {
-            const data = [
-                "التحليل: الحدث يخرق المادة 2(4) من ميثاق الأمم المتحدة المتعلقة بسيادة الدول.",
-                "التحليل: تكييف الحالة كـ 'دفاع شرعي' بموجب المادة 51 من القانون الدولي.",
-                "التحليل: رصد انتهاك لاتفاقية جنيف الرابعة بشأن حماية المدنيين في مناطق النزاع."
-            ];
-            const output = document.getElementById('legal-output');
-            output.innerText = "جاري مطابقة النصوص القانونية...";
-            setTimeout(() => {
-                output.innerText = data[Math.floor(Math.random() * data.length)];
-            }, 1000);
-        }
-
-        // 4. الرادار الصوتي ووميض الشعار
-        const radarSound = new Audio('https://www.soundjay.com/buttons/beep-01a.mp3');
-        radarSound.loop = true;
-        radarSound.volume = 0.05;
-
-        document.addEventListener('click', () => {
-            radarSound.play();
-            const logo = document.getElementById('glowing-logo');
-            setInterval(() => {
-                logo.classList.add('glowing-active');
-                setTimeout(() => logo.classList.remove('glowing-active'), 400);
-            }, 2000);
-        }, { once: true });
-    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
