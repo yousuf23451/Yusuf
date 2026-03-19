@@ -1,57 +1,47 @@
-// 1. وظيفة الساعة الرقمية
+// 1. تشغيل الساعة
 function startClock() {
     setInterval(() => {
         const now = new Date();
-        const timeStr = now.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Asia/Baghdad' });
-        document.getElementById('digital-clock').innerText = timeStr + " (BAGHDAD)";
+        document.getElementById('digital-clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
     }, 1000);
 }
 
-// 2. وظيفة الخارطة الاستراتيجية
+// 2. تشغيل الخريطة (تم التصحيح)
 function initMap() {
-    // إحداثيات مركز الشرق الأوسط
-    const map = L.map('strategic-map').setView([30.0, 40.0], 5);
+    try {
+        // تحديد المركز
+        var map = L.map('strategic-map').setView([30.0, 40.0], 4);
 
-    // استخدام نمط خارطة داكن (Dark Matter)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CartoDB'
-    }).addTo(map);
-
-    // إضافة نقاط ساخنة افتراضية (Hotspots)
-    const hotspots = [
-        { name: "غزة", coords: [31.3547, 34.3088], status: "منطقة عمليات نشطة" },
-        { name: "جنوب لبنان", coords: [33.3333, 35.5000], status: "توتر حدودي مرتفع" },
-        { name: "البحر الأحمر", coords: [20.0, 39.0], status: "تهديد للملاحة الدولية" }
-    ];
-
-    hotspots.forEach(spot => {
-        const marker = L.circleMarker(spot.coords, {
-            radius: 8,
-            fillColor: "#ff0000",
-            color: "#fff",
-            weight: 1,
-            fillOpacity: 0.8
+        // استخدام مصدر خرائط عالمي وموثوق
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap'
         }).addTo(map);
-        
-        marker.bindPopup(`<b>${spot.name}</b><br>${spot.status}`);
-    });
+
+        // إضافة نقاط توتر
+        const spots = [
+            {n: "نقطة رصد 1", c: [31.35, 34.30]},
+            {n: "نقطة رصد 2", c: [33.31, 44.36]}
+        ];
+
+        spots.forEach(s => {
+            L.circleMarker(s.c, {radius: 10, color: 'red', fillColor: '#f03', fillOpacity: 0.5}).addTo(map).bindPopup(s.n);
+        });
+
+        document.getElementById('map-status').innerText = "> الخريطة الاستراتيجية: تعمل بنجاح";
+    } catch (e) {
+        document.getElementById('map-status').innerText = "> خطأ في تحميل الخريطة: " + e.message;
+    }
 }
 
-// 3. تحديث شريط الأخبار
+// 3. شريط الأخبار
 function initTicker() {
-    const news = [
-        "• عاجل: تحركات ديبلوماسية طارئة في عواصم القرار •",
-        "• تحليل: إعادة رسم خارطة النفوذ في منطقة شرق المتوسط •",
-        "• تقرير استخباراتي: رصد تعزيزات عسكرية على الخطوط الأمامية •",
-        "• متابعة: تأثير أسعار الطاقة على الموقف السياسي للدول الكبرى •"
-    ];
-    document.getElementById('news-text').innerHTML = news.join(" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ");
+    const news = " • رصد تحركات في المنطقة • تحديث استخباراتي جديد • بث القنوات الإخبارية مستمر • ";
+    document.getElementById('news-text').innerText = news + news + news;
 }
 
-// تشغيل كل شيء عند التحميل
-window.onload = () => {
+// تشغيل الوظائف عند جاهزية المتصفح تماماً
+document.addEventListener("DOMContentLoaded", function() {
     startClock();
     initMap();
     initTicker();
-    console.log("Global Intelligence Dashboard: System Online.");
-};
+});
