@@ -1,331 +1,56 @@
-/* Strategic Operations Center - CSS Master File
-   Developed for: Yousif Khattab Sabah
-   Theme: Cyber-Military (Black, Olive, Purple)
-*/
-
 :root {
-    --bg-black: #050505;
-    --panel-dark: #0f0f0f;
-    --olive-military: #4B5320;
-    --purple-cyber: #6a0dad;
-    --text-white: #e0e0e0;
-    --neon-glow: 0 0 15px rgba(106, 13, 173, 0.5);
-    --alert-red: #ff0000;
+    --bg: #020202;
+    --panel: #0a0a0a;
+    --olive: #4B5320;
+    --purple: #6a0dad;
+    --green: #00ff41;
+    --red: #ff0000;
 }
 
-/* 1. الإعدادات العامة */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: #eee; font-family: 'Courier New', monospace; direction: rtl; }
+
+.main-header { background: var(--panel); border-bottom: 2px solid var(--purple); padding: 10px 20px; box-shadow: 0 0 15px rgba(106, 13, 173, 0.4); }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+
+.system-status-bar { display: flex; gap: 20px; font-size: 0.65rem; color: #555; padding: 5px 20px; background: #000; border-bottom: 1px solid #111; }
+.status-item span { color: var(--green); }
+
+#strategic-map { height: 500px; width: 100%; background: #000; position: relative; }
+.radar-scan {
+    position: absolute; top: 50%; left: 50%; width: 300px; height: 300px;
+    background: conic-gradient(from 0deg, rgba(106, 13, 173, 0.1) 0%, transparent 80%);
+    border-radius: 50%; transform: translate(-50%, -50%);
+    animation: radar 4s linear infinite; pointer-events: none; z-index: 1000;
 }
+@keyframes radar { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-body {
-    background-color: var(--bg-black);
-    background-image: radial-gradient(circle at center, #111 0%, #000 100%);
-    color: var(--text-white);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x: hidden;
-    direction: rtl;
-}
+.card { background: var(--panel); border: 1px solid #1a1a1a; margin-bottom: 20px; }
+.card-header { background: var(--olive); color: #fff; padding: 5px 15px; font-size: 0.8rem; font-weight: bold; }
 
-/* 2. الهيدر وشريط الحالة */
-.main-header {
-    background: var(--panel-dark);
-    border-bottom: 2px solid var(--purple-cyber);
-    padding: 10px 20px;
-    box-shadow: var(--neon-glow);
-    z-index: 1001;
-    position: relative;
-}
+textarea { width: 100%; height: 180px; background: #000; color: var(--olive); border: 1px solid var(--purple); padding: 10px; }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+.streams-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
+iframe { width: 100%; aspect-ratio: 16/9; border: none; filter: contrast(1.1); }
 
-.logo {
-    color: var(--purple-cyber);
-    font-weight: bold;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-}
+/* نقاط النبض الملونة */
+.pulse-red { width: 12px; height: 12px; border-radius: 50%; background: var(--red); animation: p-red 1.5s infinite; }
+.pulse-orange { width: 12px; height: 12px; border-radius: 50%; background: #ffae00; animation: p-orange 1.5s infinite; }
+.pulse-blue { width: 12px; height: 12px; border-radius: 50%; background: #0084ff; animation: p-blue 1.5s infinite; }
 
-.status-dot {
-    height: 10px;
-    width: 10px;
-    background-color: var(--alert-red);
-    border-radius: 50%;
-    display: inline-block;
-    animation: blink 1.5s infinite;
-}
+@keyframes p-red { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 100% { box-shadow: 0 0 0 15px rgba(255,0,0,0); } }
+@keyframes p-orange { 0% { box-shadow: 0 0 0 0 rgba(255,174,0,0.7); } 100% { box-shadow: 0 0 0 15px rgba(255,174,0,0); } }
+@keyframes p-blue { 0% { box-shadow: 0 0 0 0 rgba(0,132,255,0.7); } 100% { box-shadow: 0 0 0 15px rgba(0,132,255,0); } }
 
-.user-info { text-align: center; }
-.user-name { display: block; font-size: 1.1rem; color: #fff; font-weight: bold; }
-.user-role { font-size: 0.7rem; color: var(--olive-military); text-transform: uppercase; }
+.combat-mode { --purple: #ff0000; --olive: #8b0000; }
+.combat-btn { background: transparent; color: var(--purple); border: 1px solid var(--purple); padding: 5px 10px; cursor: pointer; }
 
-.system-status-bar {
-    display: flex;
-    gap: 20px;
-    font-size: 0.65rem;
-    color: var(--olive-military);
-    padding: 5px 20px;
-    background: rgba(0,0,0,0.9);
-    border-bottom: 1px solid #222;
-}
+.news-ticker { position: fixed; bottom: 0; width: 100%; background: #000; height: 40px; border-top: 2px solid var(--purple); display: flex; }
+.ticker-title { background: var(--purple); padding: 0 15px; line-height: 40px; font-weight: bold; }
+.ticker-text { white-space: nowrap; animation: ticker 40s linear infinite; line-height: 40px; }
+@keyframes ticker { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
 
-.status-item span { color: #00ff41; font-weight: bold; }
-
-/* 3. تخطيط الصفحة (Layout) */
-.dashboard-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    margin-bottom: 60px; /* لمساحة شريط الأخبار */
-}
-
-.card {
-    background: var(--panel-dark);
-    border: 1px solid rgba(148, 0, 211, 0.2);
-    border-radius: 2px;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-}
-
-.card-header {
-    background: linear-gradient(90deg, var(--olive-military), transparent);
-    padding: 8px 15px;
-    font-weight: bold;
-    font-size: 0.85rem;
-    color: #fff;
-    border-bottom: 1px solid var(--purple-cyber);
-}
-
-/* 4. الخارطة والتحليل */
-.top-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
-#strategic-map {
-    height: 450px;
-    width: 100%;
-    background: #000;
-    position: relative;
-}
-
-#coords-display {
-    background: rgba(0, 0, 0, 0.8);
-    color: #00ff41;
-    padding: 3px 10px;
-    font-size: 0.75rem;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    z-index: 1000;
-    border-left: 2px solid var(--purple-cyber);
-    font-family: monospace;
-}
-
-.analysis-body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-textarea {
-    background: #000;
-    color: var(--olive-military);
-    border: 1px solid var(--purple-cyber);
-    height: 200px;
-    padding: 10px;
-    resize: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9rem;
-}
-
-.system-logs {
-    font-size: 0.75rem;
-    font-family: monospace;
-    color: #444;
-    height: 100px;
-    overflow-y: auto;
-}
-
-/* 5. شاشات البث المباشر */
-.streams-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-    padding: 15px;
-}
-
-.stream-box {
-    border: 1px solid #222;
-    position: relative;
-    transition: 0.3s;
-}
-
-.stream-box:hover {
-    box-shadow: 0 0 15px var(--purple-cyber);
-    border-color: var(--purple-cyber);
-}
-
-.stream-label {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(0,0,0,0.8);
-    color: var(--olive-military);
-    padding: 2px 8px;
-    font-size: 0.65rem;
-    z-index: 10;
-    border: 1px solid var(--olive-military);
-}
-
-iframe {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    filter: grayscale(20%) contrast(1.1);
-}
-
-.stream-box:hover iframe {
-    filter: grayscale(0%);
-}
-
-/* 6. نظام الإنذار (Alert System) */
-.alert-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(255, 0, 0, 0.15);
-    z-index: 9999;
-    backdrop-filter: blur(10px);
-    justify-content: center;
-    align-items: center;
-    animation: pulse-red 1.5s infinite;
-}
-
-.alert-box {
-    background: #000;
-    border: 2px solid var(--alert-red);
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 0 60px var(--alert-red);
-    max-width: 90%;
-}
-
-.alert-header {
-    color: var(--alert-red);
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
-
-.alert-close {
-    margin-top: 25px;
-    background: var(--alert-red);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* 7. شريط الأخبار السفلي */
-.news-ticker {
-    position: fixed;
-    bottom: 0; width: 100%;
-    background: #000;
-    height: 45px;
-    display: flex;
-    border-top: 2px solid var(--purple-cyber);
-    z-index: 1000;
-}
-
-.ticker-title {
-    background: var(--purple-cyber);
-    padding: 0 20px;
-    line-height: 45px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    box-shadow: 10px 0 20px #000;
-    z-index: 2;
-}
-
-.ticker-content {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.ticker-text {
-    white-space: nowrap;
-    animation: ticker 35s linear infinite;
-    padding-right: 100%;
-    font-size: 1rem;
-    color: #ccc;
-}
-
-/* 8. تأثيرات النقاط على الخريطة */
-.pulse-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--alert-red);
-    box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
-    animation: pulse 1.5s infinite;
-}
-
-/* 9. الأنيميشن (Animations) */
-@keyframes ticker {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-@keyframes blink { 50% { opacity: 0.1; } }
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
-}
-
-@keyframes pulse-red {
-    0% { background: rgba(255, 0, 0, 0.05); }
-    50% { background: rgba(255, 0, 0, 0.2); }
-    100% { background: rgba(255, 0, 0, 0.05); }
-}
-
-.shake {
-    animation: shake 0.5s infinite;
-}
-
-@keyframes shake {
-    0% { transform: translate(1px, 1px); }
-    20% { transform: translate(-2px, 0px); }
-    40% { transform: translate(2px, -1px); }
-    60% { transform: translate(-1px, 2px); }
-    80% { transform: translate(1px, -2px); }
-    100% { transform: translate(0px, 0px); }
-}
-
-/* تحسين الخريطة للوضع الليلي */
-.leaflet-container {
-    background: #050505 !important;
-}
-.leaflet-popup-content-wrapper {
-    background: #111 !important;
-    color: #fff !important;
-    border: 1px solid var(--purple-cyber);
-    border-radius: 0px !important;
-}
+.alert-overlay { display: none; position: fixed; top: 0; width: 100%; height: 100%; background: rgba(255,0,0,0.2); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.alert-box { background: #000; border: 2px solid #ff0000; padding: 40px; text-align: center; box-shadow: 0 0 30px #ff0000; }
+.shake { animation: shake 0.5s infinite; }
+@keyframes shake { 0%, 100% { transform: translate(0,0); } 25% { transform: translate(2px, 2px); } 50% { transform: translate(-2px, -2px); } }
