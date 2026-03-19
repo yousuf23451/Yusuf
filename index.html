@@ -3,74 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يوسف خطاب صباح | مركز التحليل الاستراتيجي</title>
+    <title>يوسف خطاب صباح | غرفة العمليات</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* تأكيد ظهور الخريطة ومنع اختفائها */
+        #strategic-map {
+            height: 450px !important;
+            width: 100% !important;
+            background: #000;
+        }
+    </style>
 </head>
 <body>
 
     <header class="main-header">
         <div class="header-content">
-            <div class="logo">
-                <span class="status-dot"></span> وحدة الرصد الاستراتيجي
-            </div>
+            <div class="logo"><span class="status-dot"></span> غرفة العمليات النشطة</div>
             <div class="user-info">
                 <span class="user-name">يوسف خطاب صباح</span>
-                <span class="user-role">المحلل السياسي الاستراتيجي</span>
+                <span class="user-role">Strategic Analyst</span>
             </div>
             <div id="digital-clock" class="clock">00:00:00</div>
         </div>
     </header>
 
     <main class="dashboard-layout">
-        
         <section class="top-row">
             <div class="map-container card">
-                <div class="card-header">خارطة العمليات والتحركات الإقليمية</div>
+                <div class="card-header">الخريطة الاستراتيجية الحية</div>
                 <div id="strategic-map"></div>
             </div>
             
             <div class="analysis-container card">
-                <div class="card-header">لوحة التقديرات الاستراتيجية</div>
+                <div class="card-header">لوحة التقديرات</div>
                 <div class="analysis-body">
-                    <textarea id="intel-report" placeholder="ادخل ملخص التحليل الاستراتيجي هنا..."></textarea>
-                    <button class="btn-save">تثبيت التقرير</button>
+                    <textarea id="intel-report" placeholder="اكتب تقريرك هنا..."></textarea>
                     <div class="system-logs">
-                        <p>> نظام الرصد: متصل..</p>
-                        <p>> جاري تحديث بيانات الإحداثيات..</p>
+                        <p id="map-status">> جاري فحص استجابة الخريطة...</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="bottom-row card">
-            <div class="card-header">شاشات المراقبة الحية (Multi-Stream)</div>
+            <div class="card-header">شاشات المراقبة (YouTube Live)</div>
             <div class="streams-grid">
                 <div class="stream-box">
-                    <div class="stream-label">الحدث LIVE</div>
-                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BMA1VKZqaigJWOT0xGQ&mute=1" allowfullscreen></iframe>
+                    <div class="stream-label">الحدث</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BMA1VKZqaigJWOT0xGQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="stream-box">
-                    <div class="stream-label">الجزيرة LIVE</div>
-                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw&mute=1" allowfullscreen></iframe>
+                    <div class="stream-label">الجزيرة</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="stream-box">
-                    <div class="stream-label">العربية LIVE</div>
-                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ&mute=1" allowfullscreen></iframe>
+                    <div class="stream-label">العربية</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="stream-box">
-                    <div class="stream-label">الجزيرة مباشر LIVE</div>
-                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw&mute=1" allowfullscreen></iframe>
+                    <div class="stream-label">الجزيرة مباشر</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="news-ticker">
-        <div class="ticker-title">عاجل / استخبارات</div>
+        <div class="ticker-title">عاجل</div>
         <div class="ticker-content">
-            <div class="ticker-text" id="news-text">جاري جلب آخر البيانات الجيوسياسية...</div>
+            <div class="ticker-text" id="news-text">جاري الاتصال بالأقمار الصناعية...</div>
         </div>
     </footer>
 
