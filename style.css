@@ -1,26 +1,46 @@
 :root {
-    --bg-dark: #020202;
-    --accent-red: #ff0000;
-    --gh-green: #238636;
+    --bg: #050505;
+    --red-alert: #ff0000;
+    --green-safe: #00ff00;
 }
 
-body { background: var(--bg-dark); color: #fff; margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; transition: 0.5s; }
 
-.main-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #000; border-bottom: 2px solid var(--accent-red); box-shadow: 0 0 15px rgba(255,0,0,0.3); }
+/* الهيدر */
+.main-header { height: 60px; background: #000; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; border-bottom: 2px solid #222; }
+.logo-section { display: flex; align-items: center; gap: 10px; color: var(--green-safe); }
+.status-dot { width: 10px; height: 10px; background: var(--green-safe); border-radius: 50%; box-shadow: 0 0 10px var(--green-safe); }
 
-.live-tag { background: red; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; animation: blink 1s infinite; margin-right: 10px; }
+/* زر الطوارئ */
+#emergency-btn { background: #330000; color: #ff5555; border: 1px solid #ff0000; padding: 8px 15px; cursor: pointer; font-weight: bold; border-radius: 4px; transition: 0.3s; }
+#emergency-btn:hover { background: red; color: white; }
 
-.master-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5px; flex-grow: 1; padding: 5px; height: calc(100vh - 80px); }
+/* شريط السجل */
+#intel-log { background: #000; color: var(--green-safe); font-family: monospace; font-size: 11px; padding: 5px 20px; border-bottom: 1px solid #111; }
 
-#map { height: 100%; border: 1px solid #333; border-radius: 4px; }
+/* الحاوية الرئيسية */
+.main-container { display: flex; height: calc(100vh - 90px); }
+#map { flex: 3; border-right: 1px solid #222; }
+.news-sidebar { flex: 1; padding: 10px; overflow-y: auto; background: #080808; }
 
-.feeds-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 1fr); gap: 5px; overflow-y: auto; }
+.stream-card { margin-bottom: 15px; border: 1px solid #222; position: relative; }
+.stream-card .label { background: #111; font-size: 10px; padding: 3px 8px; color: #888; }
+iframe { width: 100%; aspect-ratio: 16/9; border: none; }
 
-.feed-box { background: #111; border: 1px solid #222; position: relative; border-radius: 4px; }
-.feed-label { position: absolute; top: 0; right: 0; background: rgba(255,0,0,0.8); color: white; padding: 2px 10px; font-size: 0.6rem; z-index: 5; }
-iframe { width: 100%; height: 100%; border: none; }
+/* --- وضع الطوارئ (Emergency Mode) --- */
+.emergency-active { animation: flash-bg 1s infinite; }
+.emergency-active #intel-log { color: white; background: red; }
+.emergency-active .status-dot { background: white; box-shadow: 0 0 20px white; }
 
-.control-btn { background: #333; color: #fff; border: 1px solid #444; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 10px; }
-.report-btn { background: var(--gh-green); color: #fff; border: none; padding: 6px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+@keyframes flash-bg {
+    0% { background: #050505; }
+    50% { background: #440000; }
+    100% { background: #050505; }
+}
 
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+/* نقاط النبض على الخريطة */
+.pulse-dot { width: 10px; height: 10px; background: red; border-radius: 50%; box-shadow: 0 0 15px red; animation: pulse-anim 2s infinite; }
+@keyframes pulse-anim {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
