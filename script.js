@@ -1,92 +1,57 @@
-function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:"smooth"}); }
-
-// عرض الأخبار
-function loadNews(){
-  const container=document.getElementById("newsContainer");
-  container.innerHTML="";
-  events.forEach(e=>{
-    const div=document.createElement("div");
-    div.innerText="📡 "+e.title;
-    container.appendChild(div);
-  });
+// 1. وظيفة الساعة الرقمية
+function startClock() {
+    setInterval(() => {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Asia/Baghdad' });
+        document.getElementById('digital-clock').innerText = timeStr + " (BAGHDAD)";
+    }, 1000);
 }
 
-// مؤشر الحرب
-function runWarIndex(){
-  let risk=0;
-  events.forEach(e=>{
-    const t=e.title.toLowerCase();
-    if(t.includes("war")) risk+=20;
-    if(t.includes("missile")||t.includes("attack")) risk+=30;
-    if(t.includes("tension")) risk+=15;
-  });
-  risk=Math.min(risk,100);
-  document.getElementById("warResult").innerText="🔥 نسبة الخطر: "+risk+"%";
+// 2. وظيفة الخارطة الاستراتيجية
+function initMap() {
+    // إحداثيات مركز الشرق الأوسط
+    const map = L.map('strategic-map').setView([30.0, 40.0], 5);
+
+    // استخدام نمط خارطة داكن (Dark Matter)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; CartoDB'
+    }).addTo(map);
+
+    // إضافة نقاط ساخنة افتراضية (Hotspots)
+    const hotspots = [
+        { name: "غزة", coords: [31.3547, 34.3088], status: "منطقة عمليات نشطة" },
+        { name: "جنوب لبنان", coords: [33.3333, 35.5000], status: "توتر حدودي مرتفع" },
+        { name: "البحر الأحمر", coords: [20.0, 39.0], status: "تهديد للملاحة الدولية" }
+    ];
+
+    hotspots.forEach(spot => {
+        const marker = L.circleMarker(spot.coords, {
+            radius: 8,
+            fillColor: "#ff0000",
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.8
+        }).addTo(map);
+        
+        marker.bindPopup(`<b>${spot.name}</b><br>${spot.status}`);
+    });
 }
 
-// التحليل الاستراتيجي
-function runStrategy(){
-  let score={escalation:0,diplomacy:0,stability:0};
-  events.forEach(e=>{
-    const t=e.title.toLowerCase();
-    if(t.includes("attack")||t.includes("missile")) score.escalation+=30;
-    if(t.includes("talk")||t.includes("agreement")) score.diplomacy+=20;
-    if(t.includes("calm")) score.stability+=10;
-  });
-  let prediction="⚖️ استقرار";
-  if(score.escalation>40) prediction="🔥 تصعيد عسكري";
-  if(score.diplomacy>30) prediction="🤝 مفاوضات";
-  document.getElementById("strategyContainer").innerHTML=`
-    <p>🔥 التصعيد: ${score.escalation}</p>
-    <p>🤝 الدبلوماسية: ${score.diplomacy}</p>
-    <p>⚖️ الاستقرار: ${score.stability}</p>
-    <h3>${prediction}</h3>`;
+// 3. تحديث شريط الأخبار
+function initTicker() {
+    const news = [
+        "• عاجل: تحركات ديبلوماسية طارئة في عواصم القرار •",
+        "• تحليل: إعادة رسم خارطة النفوذ في منطقة شرق المتوسط •",
+        "• تقرير استخباراتي: رصد تعزيزات عسكرية على الخطوط الأمامية •",
+        "• متابعة: تأثير أسعار الطاقة على الموقف السياسي للدول الكبرى •"
+    ];
+    document.getElementById('news-text').innerHTML = news.join(" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ");
 }
 
-// التنبيهات
-function loadAlerts(){
-  const box=document.getElementById("alertsContainer");
-  box.innerHTML="";
-  events.forEach(e=>{
-    if(e.type==="war"||e.type==="alert"){
-      const div=document.createElement("div");
-      div.innerText="🚨 "+e.title;
-      div.style.color="red";
-      div.style.fontWeight="bold";
-      box.appendChild(div);
-    }
-  });
-}
-
-// الخريطة التفاعلية
-function loadMap(){
-  const map=L.map('map').setView([30,40],3);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
-  events.forEach(e=>{
-    if(e.lat&&e.lng){
-      let iconUrl;
-      if(e.type==="war") iconUrl="icons/war.png";
-      else if(e.type==="peace") iconUrl="icons/peace.png";
-      else iconUrl="icons/alert.png";
-      const customIcon=L.icon({iconUrl:iconUrl,iconSize:[32,32]});
-      L.marker([e.lat,e.lng],{icon:customIcon}).addTo(map).bindPopup(`🔥 ${e.title}`);
-    }
-  });
-}
-
-// تحديث الأخبار كل دقيقة
-function autoUpdate(){
-  loadNews();
-  loadAlerts();
-  runWarIndex();
-  runStrategy();
-  setTimeout(autoUpdate,60000);
-}
-
-// تشغيل تلقائي
-loadNews();
-loadAlerts();
-loadMap();
-runWarIndex();
-runStrategy();
-autoUpdate();
+// تشغيل كل شيء عند التحميل
+window.onload = () => {
+    startClock();
+    initMap();
+    initTicker();
+    console.log("Global Intelligence Dashboard: System Online.");
+};
