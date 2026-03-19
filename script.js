@@ -1,83 +1,45 @@
-let map;
-let isEmergency = false;
+let map = L.map('map', {zoomControl: false}).setView([30.0, 48.0], 5);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-function init() {
-    // 1. تعريف طبقات الخريطة
-    const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png');
-    const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+// مصفوفة المواقع العسكرية المحدثة
+const milSites = [
+    // القواعد الأمريكية (US Bases)
+    { n: "قاعدة عين الأسد (US)", c: [33.91, 42.44], type: "us", i: "fa-plane-departure" },
+    { n: "قاعدة التنف (US)", c: [33.35, 38.82], type: "us", i: "fa-shield-halved" },
+    { n: "الأسطول الخامس (US)", c: [26.21, 50.60], type: "us", i: "fa-ship" },
+    { n: "قاعدة العديد (US)", c: [25.11, 51.31], type: "us", i: "fa-jet-fighter" },
+    { n: "قاعدة علي السالم (US)", c: [29.34, 47.51], type: "us", i: "fa-plane-up" },
 
-    map = L.map('map', {
-        center: [33.31, 44.36], // المركز بغداد
-        zoom: 5,
-        layers: [darkLayer]
+    // مواقع الحرس الثوري (IRGC Sites)
+    { n: "قيادة الحرس الثوري - طهران", c: [35.68, 51.38], type: "ir", i: "fa-building-shield" },
+    { n: "موقع نطنز (IRGC)", c: [33.72, 51.91], type: "ir", i: "fa-radiation" },
+    { n: "قاعدة بندر عباس (IRGC)", c: [27.18, 56.27], type: "ir", i: "fa-anchor" },
+    { n: "منشأة فردو (IRGC)", c: [34.50, 50.80], type: "ir", i: "fa-microchip" },
+
+    // مناطق نزاع ساخنة
+    { n: "رصد إطلاق صواريخ", c: [32.0, 47.0], type: "warn", i: "fa-rocket" },
+    { n: "ضربة جوية نشطة", c: [33.33, 35.50], type: "warn", i: "fa-explosion" }
+];
+
+milSites.forEach(s => {
+    let iconClass = s.type === 'us' ? 'us-icon' : (s.type === 'ir' ? 'ir-icon' : 'warn-icon');
+    let customIcon = L.divIcon({
+        html: `<i class="fa-solid ${s.i} mil-icon ${iconClass}"></i>`,
+        className: 'mil-marker',
+        iconSize: [25, 25]
     });
-
-    const baseLayers = { "الرؤية الليلية": darkLayer, "القمر الصناعي": satelliteLayer };
-    L.control.layers(baseLayers).addTo(map);
-
-    // 2. توزيع أهم الأهداف الـ 55 (عينة استراتيجية)
-    const hotSpots = [
-        { name: "القدس - حائط البراق", loc: [31.77, 35.23] },
-        { name: "طهران - مركز القيادة", loc: [35.68, 51.38] },
-        { name: "مفاعل ديمونة", loc: [31.00, 35.14] },
-        { name: "جنوب لبنان", loc: [33.33, 35.50] },
-        { name: "مضيق هرمز", loc: [26.56, 56.25] },
-        { name: "جرف الصخر - العراق", loc: [32.87, 44.21] }
-    ];
-
-    hotSpots.forEach(p => {
-        L.marker(p.loc, { icon: L.divIcon({ className: 'pulse-dot' }) }).addTo(map)
-            .bindPopup(`<b>[${p.name}]</b><br>رصد نشط 24/7`);
-    });
-
-    // 3. تحديث الساعة والسجل
-    startSystems();
-}
+    
+    L.marker(s.c, {icon: customIcon}).addTo(map)
+        .bindPopup(`<b>${s.n}</b><br>الحالة: مراقبة بالأقمار الصناعية`);
+});
 
 function triggerEmergency() {
-    const body = document.body;
-    const siren = document.getElementById('siren');
-    const btn = document.getElementById('emergency-btn');
-
-    if (!isEmergency) {
-        body.classList.add('emergency-active');
-        btn.innerText = "OFF EMERGENCY";
-        btn.style.background = "white";
-        btn.style.color = "red";
-        siren.play();
-        isEmergency = true;
-        updateLog("> !!! تحذير: تم تفعيل وضع الطوارئ الشامل !!!");
-    } else {
-        body.classList.remove('emergency-active');
-        btn.innerText = "EMERGENCY MODE";
-        btn.style.background = "#330000";
-        btn.style.color = "#ff5555";
-        siren.pause();
-        isEmergency = false;
-        updateLog("> عودة للنظام الطبيعي... الرصد مستمر.");
-    }
+    document.body.classList.toggle('emergency-active');
+    // إضافة صوت صفارة إنذار
+    let audio = new Audio('https://www.soundjay.com/buttons/beep-01a.mp3');
+    audio.play();
 }
 
-function updateLog(msg) {
-    document.getElementById('intel-log').innerText = msg;
-}
-
-function startSystems() {
-    setInterval(() => {
-        document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
-    }, 1000);
-
-    const logs = [
-        "> مزامنة الأقمار الصناعية فوق طهران...",
-        "> رصد طيران استطلاع في الأنبار...",
-        "> يوسف خطاب: تحليل إشارات هرمز...",
-        "> تحديث: جبهة لبنان تحت الرصد المجهري..."
-    ];
-    let i = 0;
-    setInterval(() => {
-        if (!isEmergency) updateLog(logs[i % logs.length]);
-        i++;
-    }, 5000);
-}
-
-document.addEventListener('DOMContentLoaded', init);
+setInterval(() => {
+    document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
+}, 1000);
