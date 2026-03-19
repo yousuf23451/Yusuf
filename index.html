@@ -2,48 +2,35 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>YOUSIF MONITOR | مركز العمليات الاستراتيجي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOUSIF INTEL | خارطة الانتشار العسكري</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="safe-mode">
+<body>
 
-    <audio id="siren" src="https://www.soundjay.com/buttons/beep-01a.mp3" loop></audio>
-
-    <header class="main-header">
-        <div class="logo-section">
-            <span class="status-dot"></span>
-            <strong>YOUSIF MONITOR</strong> <small>V6.0 FINAL</small>
+    <header class="intel-header">
+        <div class="header-main">
+            <span class="pulse-status"></span>
+            <h1>مركز رصد يوسف خطاب <small>| النسخة العسكرية</small></h1>
         </div>
-        
-        <div class="actions">
-            <button onclick="triggerEmergency()" id="emergency-btn">EMERGENCY MODE</button>
-            <button onclick="window.print()" class="report-btn">تصدير تقرير</button>
+        <div class="header-actions">
+            <button onclick="triggerEmergency()" id="alert-btn">إعلان استنفار 🚨</button>
             <div id="clock">00:00:00</div>
         </div>
     </header>
 
-    <div id="intel-log">
-        > نظام الرصد نشط... الأقمار الصناعية في وضع المزامنة...
+    <div id="map"></div>
+
+    <div class="intel-footer">
+        <div class="ticker-label">URGENT</div>
+        <marquee>رصد نشاط جوي فوق قاعدة عين الأسد... تحركات بحرية في مضيق هرمز... مراقبة مستمرة لمواقع الحرس الثوري في أصفهان وبندر عباس...</marquee>
     </div>
 
-    <div class="main-container">
-        <div id="map"></div>
-
-        <aside class="news-sidebar">
-            <div class="stream-card">
-                <div class="label">الجزيرة مباشر</div>
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw" allowfullscreen></iframe>
-            </div>
-            <div class="stream-card">
-                <div class="label">العربية مباشر</div>
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ" allowfullscreen></iframe>
-            </div>
-            <div class="stream-card">
-                <div class="label">RT Arabic</div>
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UC7ffIn6-ZfV6_a1396q7-yQ" allowfullscreen></iframe>
-            </div>
-        </aside>
+    <div class="live-feeds">
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw"></iframe>
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ"></iframe>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
