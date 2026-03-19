@@ -2,58 +2,49 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOUSIF MONITOR | STRATEGIC LIVE HUB</title>
+    <title>YOUSIF MONITOR | مركز العمليات الاستراتيجي</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="command-center">
+<body class="safe-mode">
 
-    <audio id="alert-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3" preload="auto"></audio>
-    <audio id="radar-sound" src="https://www.soundjay.com/communication/radar-sweep-01.mp3" loop preload="auto"></audio>
+    <audio id="siren" src="https://www.soundjay.com/buttons/beep-01a.mp3" loop></audio>
 
-    <header class="main-nav">
-        <div class="brand">YOUSIF MONITOR <span class="live-tag">STRATEGIC LIVE</span></div>
-        <div class="nav-controls">
-            <button onclick="toggleAudio()" id="audio-btn" class="control-btn">كتم الرادار</button>
-            <button onclick="generateReport()" class="report-btn">إصدار تقرير استراتيجي</button>
-            <div id="clock" class="digital-clock">00:00:00</div>
+    <header class="main-header">
+        <div class="logo-section">
+            <span class="status-dot"></span>
+            <strong>YOUSIF MONITOR</strong> <small>V6.0 FINAL</small>
+        </div>
+        
+        <div class="actions">
+            <button onclick="triggerEmergency()" id="emergency-btn">EMERGENCY MODE</button>
+            <button onclick="window.print()" class="report-btn">تصدير تقرير</button>
+            <div id="clock">00:00:00</div>
         </div>
     </header>
 
-    <main class="master-layout">
-        <section class="map-container">
-            <div id="map"></div>
-            <div class="map-overlay">نظام رصد النزاعات - نسخة 2026 | المحلل يوسف خطاب</div>
-        </section>
+    <div id="intel-log">
+        > نظام الرصد نشط... الأقمار الصناعية في وضع المزامنة...
+    </div>
 
-        <section class="feeds-grid">
-            <div class="feed-box">
-                <div class="feed-label">مباشر: القدس (حائط البراق)</div>
-                <iframe src="https://www.youtube.com/embed/5m9V6Hk4m6Q?autoplay=1&mute=1" allowfullscreen></iframe>
-            </div>
-            <div class="feed-box">
-                <div class="feed-label">مباشر: طهران (Press TV)</div>
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UC_Oas_Z6E_Z_pD-xWzIq4vQ" allowfullscreen></iframe>
-            </div>
-            <div class="feed-box">
-                <div class="feed-label">مباشر: بيروت ولبنان</div>
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BMA1VKZqaigJWOT0xGQ" allowfullscreen></iframe>
-            </div>
-            <div class="feed-box">
-                <div class="feed-label">مباشر: الرياض والخليج</div>
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCpP7vS6_M_qXGsh9L-Ipx-Q" allowfullscreen></iframe>
-            </div>
-            <div class="feed-box"><div class="feed-label">الجزيرة مباشر</div><iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw"></iframe></div>
-            <div class="feed-box"><div class="feed-label">العربية مباشر</div><iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ"></iframe></div>
-            <div class="feed-box"><div class="feed-label">سكاي نيوز عربية</div><iframe src="https://www.youtube.com/embed/live_stream?channel=UC0p5jTq6R7_S7v3L9pL6tKg"></iframe></div>
-            <div class="feed-box"><div class="feed-label">RT Arabic</div><iframe src="https://www.youtube.com/embed/live_stream?channel=UC7ffIn6-ZfV6_a1396q7-yQ"></iframe></div>
-        </section>
-    </main>
+    <div class="main-container">
+        <div id="map"></div>
 
-    <footer class="ticker-footer">
-        <marquee id="ticker">... جاري الاتصال بالأقمار الصناعية ... رصد تحركات في جنوب لبنان ... استنفار في حقول الغاز بالخليج ... مراقبة القدس وطهران مستمرة بتوقيت يوسف خطاب صباح ...</marquee>
-    </footer>
+        <aside class="news-sidebar">
+            <div class="stream-card">
+                <div class="label">الجزيرة مباشر</div>
+                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw" allowfullscreen></iframe>
+            </div>
+            <div class="stream-card">
+                <div class="label">العربية مباشر</div>
+                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ" allowfullscreen></iframe>
+            </div>
+            <div class="stream-card">
+                <div class="label">RT Arabic</div>
+                <iframe src="https://www.youtube.com/embed/live_stream?channel=UC7ffIn6-ZfV6_a1396q7-yQ" allowfullscreen></iframe>
+            </div>
+        </aside>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
