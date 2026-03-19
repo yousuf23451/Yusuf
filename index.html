@@ -1,77 +1,80 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>🌍 YIS - منصة يوسف الاستخباراتي النهائية</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يوسف خطاب صباح | مركز التحليل الاستراتيجي</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>🌍 YIS - منصة يوسف الاستخباراتي النهائية</h1>
-  </header>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="status-dot"></span> وحدة الرصد الاستراتيجي
+            </div>
+            <div class="user-info">
+                <span class="user-name">يوسف خطاب صباح</span>
+                <span class="user-role">المحلل السياسي الاستراتيجي</span>
+            </div>
+            <div id="digital-clock" class="clock">00:00:00</div>
+        </div>
+    </header>
 
-  <aside class="sidebar">
-    <h2>🧠 القائمة</h2>
-    <ul>
-      <li onclick="scrollToSection('news')">📡 الأخبار</li>
-      <li onclick="scrollToSection('war')">🔥 مؤشر الحرب</li>
-      <li onclick="scrollToSection('strategy')">🧠 التحليل</li>
-      <li onclick="scrollToSection('alerts')">🚨 التنبيهات</li>
-      <li onclick="scrollToSection('mapSection')">🗺️ خريطة النزاعات</li>
-      <li onclick="scrollToSection('liveNews')">📺 بث مباشر</li>
-    </ul>
-  </aside>
+    <main class="dashboard-layout">
+        
+        <section class="top-row">
+            <div class="map-container card">
+                <div class="card-header">خارطة العمليات والتحركات الإقليمية</div>
+                <div id="strategic-map"></div>
+            </div>
+            
+            <div class="analysis-container card">
+                <div class="card-header">لوحة التقديرات الاستراتيجية</div>
+                <div class="analysis-body">
+                    <textarea id="intel-report" placeholder="ادخل ملخص التحليل الاستراتيجي هنا..."></textarea>
+                    <button class="btn-save">تثبيت التقرير</button>
+                    <div class="system-logs">
+                        <p>> نظام الرصد: متصل..</p>
+                        <p>> جاري تحديث بيانات الإحداثيات..</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <main>
-    <section id="news">
-      <h2>📡 الأخبار العالمية</h2>
-      <div id="newsContainer"></div>
-    </section>
+        <section class="bottom-row card">
+            <div class="card-header">شاشات المراقبة الحية (Multi-Stream)</div>
+            <div class="streams-grid">
+                <div class="stream-box">
+                    <div class="stream-label">الحدث LIVE</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BMA1VKZqaigJWOT0xGQ&mute=1" allowfullscreen></iframe>
+                </div>
+                <div class="stream-box">
+                    <div class="stream-label">الجزيرة LIVE</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw&mute=1" allowfullscreen></iframe>
+                </div>
+                <div class="stream-box">
+                    <div class="stream-label">العربية LIVE</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCahmwUhMD1yApcJTiDpe-BQ&mute=1" allowfullscreen></iframe>
+                </div>
+                <div class="stream-box">
+                    <div class="stream-label">الجزيرة مباشر LIVE</div>
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCB2hU9zQkSokg1-h5y_NfTw&mute=1" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <section id="war">
-      <h2>🔥 مؤشر الحرب</h2>
-      <button onclick="runWarIndex()">تحليل</button>
-      <p id="warResult"></p>
-    </section>
+    <footer class="news-ticker">
+        <div class="ticker-title">عاجل / استخبارات</div>
+        <div class="ticker-content">
+            <div class="ticker-text" id="news-text">جاري جلب آخر البيانات الجيوسياسية...</div>
+        </div>
+    </footer>
 
-    <section id="strategy">
-      <h2>🧠 التحليل الاستراتيجي</h2>
-      <button onclick="runStrategy()">تشغيل</button>
-      <div id="strategyContainer"></div>
-    </section>
-
-    <section id="alerts">
-      <h2>🚨 التنبيهات</h2>
-      <div id="alertsContainer"></div>
-    </section>
-
-    <section id="mapSection">
-      <h2>🗺️ خريطة النزاعات</h2>
-      <div id="map" style="height:600px;"></div>
-    </section>
-
-    <section id="liveNews">
-      <h2>📺 الأخبار المباشرة</h2>
-      <div class="newsChannels">
-        <h3>العالمية</h3>
-        <iframe src="https://www.youtube.com/embed/live_stream?channel=UC16niRr50-MSBwiO3YDb3RA" frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCt8k3wtdEX8jrhBd3Q7t5ZQ" frameborder="0" allowfullscreen></iframe>
-
-        <h3>العربية</h3>
-        <iframe src="https://www.youtube.com/embed/live_stream?channel=UC-7Z5D-Rz-9h3F5UuVjrD2g" frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCNx8Fj0iD0oP5w5h5xJ2v0Q" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </section>
-  </main>
-</div>
-
-<audio id="alertSound" src="sounds/alert.mp3" preload="auto"></audio>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data.js"></script>
-<script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
