@@ -1,68 +1,77 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yousif al jarah | الرادار الجيوسياسي</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>🌍 YIS - منصة يوسف الاستخباراتي النهائية</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
-    <canvas id="matrix-canvas"></canvas>
 
-    <div class="world-clocks">
-        <div class="clock-item"><span class="city-name">BAGHDAD</span><div id="clock-baghdad" class="digital-time">00:00:00</div></div>
-        <div class="clock-item"><span class="city-name">TEHRAN</span><div id="clock-tehran" class="digital-time">00:00:00</div></div>
-        <div class="clock-item"><span class="city-name">WASHINGTON</span><div id="clock-washington" class="digital-time">00:00:00</div></div>
-    </div>
+<div class="container">
+  <header>
+    <h1>🌍 YIS - منصة يوسف الاستخباراتي النهائية</h1>
+  </header>
 
-    <header>
-        <div class="site-title">YOUSIF <span>AL JARAH</span></div>
-        <p class="subtitle">GLOBAL STRATEGIC INTELLIGENCE</p>
-    </header>
+  <aside class="sidebar">
+    <h2>🧠 القائمة</h2>
+    <ul>
+      <li onclick="scrollToSection('news')">📡 الأخبار</li>
+      <li onclick="scrollToSection('war')">🔥 مؤشر الحرب</li>
+      <li onclick="scrollToSection('strategy')">🧠 التحليل</li>
+      <li onclick="scrollToSection('alerts')">🚨 التنبيهات</li>
+      <li onclick="scrollToSection('mapSection')">🗺️ خريطة النزاعات</li>
+      <li onclick="scrollToSection('liveNews')">📺 بث مباشر</li>
+    </ul>
+  </aside>
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <div class="panel">
-                <h4 class="panel-title">الخلاصات العاجلة (LIVE)</h4>
-                <div id="news-ticker">
-                    <div class="event-item">🔴 جاري الاتصال بالرادار...</div>
-                </div>
-            </div>
+  <main>
+    <section id="news">
+      <h2>📡 الأخبار العالمية</h2>
+      <div id="newsContainer"></div>
+    </section>
 
-            <div class="panel">
-                <h4 class="panel-title">وحدة التحليل الاستراتيجي</h4>
-                <div class="legal-box">
-                    <p id="political-output">بانتظار التقاط إشارات ميدانية عاجلة...</p>
-                </div>
-                <div class="btn-group">
-                    <button class="analyze-btn" onclick="analyzeIncident()">تحليل المشهد</button>
-                    <button id="export-btn" class="analyze-btn" onclick="exportReport()">استخراج تقرير</button>
-                </div>
-            </div>
-        </aside>
+    <section id="war">
+      <h2>🔥 مؤشر الحرب</h2>
+      <button onclick="runWarIndex()">تحليل</button>
+      <p id="warResult"></p>
+    </section>
 
-        <main class="content-area">
-            <div class="video-grid">
-                <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCfiwzLy-8yKzIbsmZTzxDgw" frameborder="0" allowfullscreen></iframe></div>
-                <div class="video-box"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCrj5BGAHt60ilS67_jD_0_g" frameborder="0" allowfullscreen></iframe></div>
-            </div>
-            <div class="panel">
-                <div id="map"></div>
-            </div>
-        </main>
-    </div>
+    <section id="strategy">
+      <h2>🧠 التحليل الاستراتيجي</h2>
+      <button onclick="runStrategy()">تشغيل</button>
+      <div id="strategyContainer"></div>
+    </section>
 
-    <footer class="legal-footer">
-        <p>مشروع أكاديمي | باحث العلوم السياسية <b>يوسف الجراح</b> [جامعة العراقية]</p>
-        <img src="https://profile-counter.glitch.me/yousuf23451/count.svg" alt="Counter">
-    </footer>
+    <section id="alerts">
+      <h2>🚨 التنبيهات</h2>
+      <div id="alertsContainer"></div>
+    </section>
 
-    <script src="script.js"></script>
+    <section id="mapSection">
+      <h2>🗺️ خريطة النزاعات</h2>
+      <div id="map" style="height:600px;"></div>
+    </section>
+
+    <section id="liveNews">
+      <h2>📺 الأخبار المباشرة</h2>
+      <div class="newsChannels">
+        <h3>العالمية</h3>
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UC16niRr50-MSBwiO3YDb3RA" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCt8k3wtdEX8jrhBd3Q7t5ZQ" frameborder="0" allowfullscreen></iframe>
+
+        <h3>العربية</h3>
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UC-7Z5D-Rz-9h3F5UuVjrD2g" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCNx8Fj0iD0oP5w5h5xJ2v0Q" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+</div>
+
+<audio id="alertSound" src="sounds/alert.mp3" preload="auto"></audio>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
