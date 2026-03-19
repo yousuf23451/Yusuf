@@ -1,26 +1,161 @@
+:root {
+    --bg-black: #050505;
+    --panel-dark: #0f0f0f;
+    --olive-military: #4B5320;
+    --purple-cyber: #6a0dad;
+    --text-white: #e0e0e0;
+    --neon-glow: 0 0 10px rgba(106, 13, 173, 0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#03060f;
-  color:#00ff9f;
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    direction: rtl;
 }
-.container { display:flex; }
-header { width:100%; text-align:center; padding:10px 0; border-bottom:2px solid #00ff9f; }
-.sidebar {
-  width:200px;
-  padding:10px;
-  border-right:2px solid #00ff9f;
-  position:fixed;
-  height:100vh;
-  background:#01030a;
+
+/* الهيدر */
+.main-header {
+    background: var(--panel-dark);
+    border-bottom: 2px solid var(--purple-cyber);
+    padding: 10px 20px;
+    box-shadow: var(--neon-glow);
 }
-.sidebar h2 { text-align:center; }
-.sidebar ul { list-style:none; padding:0; }
-.sidebar li { padding:10px; cursor:pointer; border-bottom:1px solid #00ff9f; }
-.sidebar li:hover { background:#00ff9f; color:black; }
-main { margin-left:220px; padding:20px; }
-section { margin-bottom:30px; padding:10px; border:1px solid #00ff9f; border-radius:5px; }
-button { padding:10px; background:#00ff9f; color:black; border:none; cursor:pointer; margin-bottom:10px; }
-button:hover { background:#00cc7a; }
-.newsChannels { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.newsChannels iframe { width:100%; height:200px; border:2px solid #00ff9f; border-radius:5px; }
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--purple-cyber);
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1.5s infinite;
+}
+
+.user-info { text-align: center; }
+.user-name { display: block; font-size: 1.1rem; color: #fff; }
+.user-role { font-size: 0.8rem; color: var(--olive-military); }
+
+/* تخطيط الداشبورد */
+.dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.card {
+    background: var(--panel-dark);
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.card-header {
+    background: var(--olive-military);
+    padding: 8px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+/* الخارطة والتحليل */
+.top-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+#strategic-map { height: 450px; width: 100%; background: #000; }
+
+.analysis-body { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+
+textarea {
+    background: #000;
+    color: var(--olive-military);
+    border: 1px solid var(--purple-cyber);
+    height: 250px;
+    padding: 10px;
+    resize: none;
+    font-family: monospace;
+}
+
+.btn-save {
+    background: var(--purple-cyber);
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* البث المباشر */
+.streams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+
+.stream-box { border: 1px solid #222; position: relative; }
+.stream-label {
+    position: absolute;
+    top: 5px; right: 5px;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    z-index: 10;
+}
+
+iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+
+/* شريط الأخبار */
+.news-ticker {
+    position: fixed;
+    bottom: 0; width: 100%;
+    background: #000;
+    height: 40px;
+    display: flex;
+    border-top: 1px solid var(--purple-cyber);
+    z-index: 1000;
+}
+
+.ticker-title {
+    background: var(--purple-cyber);
+    padding: 0 15px;
+    line-height: 40px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.ticker-content { overflow: hidden; display: flex; align-items: center; width: 100%; }
+
+.ticker-text {
+    white-space: nowrap;
+    animation: ticker 40s linear infinite;
+    padding-right: 100%;
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes blink { 50% { opacity: 0.2; } }
+
+/* تعديلات الخارطة لتناسب الوضع الليلي */
+.leaflet-container { background: #050505 !important; }
